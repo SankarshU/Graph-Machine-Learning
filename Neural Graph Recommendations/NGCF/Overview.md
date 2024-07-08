@@ -4,10 +4,11 @@
 - Embedding propagation layer, which refines a user’s (u) (or an item’s(i)) embedding by aggregating the embeddings of the interacted items (or users).
 - Explicitly encodes the collaborative signal in the form of high-order connectivities by performing embedding propagation as shown in below figures
   
-  ![image](![image](https://github.com/SankarshU/Graph-Machine-Learning/assets/44226862/61acd158-214f-483a-8996-41596bb82ff9)
-)  ![image](https://github.com/SankarshU/Graph-Machine-Learning/assets/44226862/9ee19d31-08f7-4579-9928-fd0d348279f7)
+![image](https://github.com/SankarshU/Graph-Machine-Learning/assets/44226862/ec67e516-5638-4233-aa37-67515d110868) ![image](https://github.com/SankarshU/Graph-Machine-Learning/assets/44226862/3fb35a0f-1b3d-44dc-8afa-6ce10308c690)
+
+
  
-- Many of improvements over NGCF for eg one of the popularly benchmarked: [LightGCN](https://arxiv.org/pdf/2002.02126) is  achieved with marginal changes in implementaion in forwradpass/message aggregation
+- Many of improvements over NGCF for eg one of the popularly benchmarked: [LightGCN](https://arxiv.org/pdf/2002.02126) is  achieved with marginal changes in implementation in forwradpass/message aggregation
   - In LightGCN, the concatenation of embedding layers from NGCF is replaced with weighted aggregation, and non-linear activations are removed.
   - Below equations show the main difference in learned embeddings
   
