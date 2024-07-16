@@ -6,7 +6,7 @@
 as well as active research aimed at further enhancing their capabilities and applications
 
 ###  Neural Graph Recommendations using a Bipartite Graph
-- ** In this Repo we will deep dive into one the most popular techincuqe Neural Graph Collaborative Filtering ([NGCF](https://arxiv.org/pdf/1905.08108)) SIGIR (2019),
+- ** In this Repo we will [walk through](https://github.com/SankarshU/Graph-Machine-Learning/blob/28c899669be416a569ef568ccb79ec5124b21b88/Neural%20Graph%20Recommendations/NGCF/Walkthrough.md) one the most popular techincuqe Neural Graph Collaborative Filtering ([NGCF](https://arxiv.org/pdf/1905.08108)) SIGIR (2019),
 this Repo should help with conceptual understanding and implemenation of NGCF **
 
 #### Main idea is to demonstrate research material behind Neural Graph recommendations with NGCF publication and simple illustrations with code
