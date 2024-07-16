@@ -5,9 +5,15 @@
 - Consequently, there has been widespread adoption of GNN-based recommender systems in practice across various industries, 
 as well as active research aimed at further enhancing their capabilities and applications
 
-Neural Graph Recommendations using a Bipartite Graph
-- In this Repo we will deep dive into one the most popualr techincuqe Neural Graph Collaborative Filtering ([NGCF](https://arxiv.org/pdf/1905.08108)) SIGIR (2019),
-this Repo should help with conceptual understanding and implemenation of NGCF
+###  Neural Graph Recommendations using a Bipartite Graph
+- ** In this Repo we will deep dive into one the most popular techincuqe Neural Graph Collaborative Filtering ([NGCF](https://arxiv.org/pdf/1905.08108)) SIGIR (2019),
+this Repo should help with conceptual understanding and implemenation of NGCF **
+
+#### Main idea is to demonstrate research material behind Neural Graph recommendations with NGCF publication and simple illustrations with code
+- #### Also this to give  a direction as how  advancements such as below
+- [GACSE](https://arxiv.org/pdf/2102.03135) (graph attention)
+- [lightGCN](https://arxiv.org/abs/2002.02126)(benchmarked in literature) and further  can be developed
+  
 
 ![image](https://github.com/SankarshU/Graph-Machine-Learning/assets/44226862/84cf6704-2142-4879-b37a-19f0d5d2bf04)
 
