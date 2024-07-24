@@ -3,7 +3,7 @@
 - This notebook concisely presents NGCF in PyTorch, allowing for quick experimentation and understanding of both the theory (formulation) and its implementation.
 - The goal is to have pointers for development of novel methods based on this material
 
- MovieLens data sets were collected by the GroupLens Research Project at the University of Minnesota.
+ Data set for this experiment is : MovieLens .
 - Movielens data set consists of:
 	- 100,000 ratings (1-5) from 943 users on 1682 movies.
 	- Each user has rated at least 20 movies.
