@@ -20,7 +20,7 @@
 - Please note  LightGCN, which is among the benchmarks for recommendation systems, is a simple modification of NGCF
 
 ### Sourse Githubs
-- Original implemnations are not required just from publications and code from NGCF  GACSE and  LightGCN can be implemented with minimal changees
+- Original implementations are added only as references; instead, publications and code from NGCF, GACSE, and LightGCN can be implemented with minimal changes
 - [GACSE](https://github.com/AnonymousResearchLab/BipartiteGraphModel/blob/master/BipartiteGraphModels/GACSE.py)
 - [LightGCN](https://arxiv.org/abs/2002.02126)
 - [NGCF](https://github.com/huangtinglin/NGCF-PyTorch)
