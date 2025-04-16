@@ -13,6 +13,7 @@ this Repo should help with conceptual understanding and implemenation of NGCF **
 - #### Also this to give  a direction as how  advancements such as below
 - [GACSE](https://arxiv.org/pdf/2102.03135) (graph attention)
 - [lightGCN](https://arxiv.org/abs/2002.02126)(benchmarked in literature) and further  can be developed
+- [NGCF with Attention ** ](https://github.com/SankarshU/Graph-Machine-Learning/blob/ce84eea86e5be8af2a5c810ffc97068b8a63bce0/Neural%20Graph%20Recommendations/NGCF/NGCF_with_Attention.pdf) --> My recent project
   
 
 ![image](https://github.com/SankarshU/Graph-Machine-Learning/assets/44226862/84cf6704-2142-4879-b37a-19f0d5d2bf04)
