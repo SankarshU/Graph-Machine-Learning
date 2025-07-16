@@ -1,6 +1,6 @@
 # Consensus-Based Bayesian Anomaly Detection in Enterprise Directory Access Graphs
 
-This project implements a novel framework for detecting anomalous user behavior in enterprise systems by modeling access patterns using consensus dynamics and Bayesian reasoning.
+This work implements a novel framework for detecting anomalous user behavior in enterprise systems by modeling access patterns using consensus dynamics and Bayesian reasoning.
 
 ## 🔍 Problem Overview
 
@@ -34,12 +34,16 @@ Our approach applies consensus theorems to track how directory-level beliefs abo
 
 - Correctly identifies anomalous user behavior based on divergence from group belief
 - Explains anomalies with interpretable matrix dynamics
-- Scalable to larger systems of users and directories
+- Possibility to scale to larger systems of users and directories
 
-## 📁 Structure
+## 📁 Theory and Implementation
 
--  ├── Consensus_Bayesian_Framework.pdf # Full paper detailing theory + implementation
--  ├── Opinion_dynamics_UAD.py # Simulation code (original paper + our extension) 
+- 📄 [**Consensus_Bayesian_Framework.pdf**](https://github.com/SankarshU/Graph-Machine-Learning/blob/f6a03472dccb5522e89372b0d177f306309eb778/Consenus/Consesus_Bayesain_Framework.pdf)  
+  *Full paper detailing theoretical foundations and implementation of the framework.*
+
+- 🧪 [**Opinion_dynamics_UAD.ipynb**](https://github.com/SankarshU/Graph-Machine-Learning/blob/f6a03472dccb5522)
+  *Simulation code implementing both the original opinion dynamics model and our consensus-based anomaly detection extension.*
+ 
 ## 🔬 Future Work
 
 - Apply to real-world access logs
