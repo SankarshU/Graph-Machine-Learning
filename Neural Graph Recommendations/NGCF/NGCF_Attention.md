@@ -4,7 +4,8 @@
 **Title**: Attention-Augmented NGCF: Personalized Graph Recommendation via Learnable Neighbor Weighting  
 **Status**: 🟡 Under Review  
 **Code**: [NGCF with Attention (PyTorch)](https://github.com/SankarshU/Graph-Machine-Learning/tree/d432f63f098f98a672f591593c8b682de2c395cb/Neural%20Graph%20Recommendations/Code/NGCF_with_Attention)  
-**Manuscript**: Submitted version available [here](https://github.com/SankarshU/Graph-Machine-Learning/blob/60c690296f7dab575266d96532143eb0baefff9d/Neural%20Graph%20Recommendations/NGC)
+**Manuscript**: Submitted version available [here (PDF)](https://github.com/SankarshU/Graph-Machine-Learning/blob/60c690296f7dab575266d96532143eb0baefff9d/Neural%20Graph%20Recommendations/NGCF/recsys_lbr_ngcf_with_attn.pdf)
+
 
 
 ## 📌 Overview
