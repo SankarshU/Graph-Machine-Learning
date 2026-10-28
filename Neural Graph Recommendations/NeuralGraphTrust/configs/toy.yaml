@@ -1,0 +1,34 @@
+# Tiny synthetic dataset — used only for end-to-end smoke testing.
+dataset:
+  name: toy
+  data_dir: data/toy
+  train_file: train.txt
+  test_file: test.txt
+
+model:
+  embed_dim: 16
+  n_layers: 2
+  attn_hidden: 16
+  gamma_init: 0.2
+  gamma_learnable: true
+  gamma_per_layer: false
+  cl_eps: 0.1
+  cl_temp: 0.2
+
+train:
+  epochs: 10
+  batch_size: 256
+  lr: 5.0e-3
+  weight_decay: 1.0e-4
+  cl_lambda: 0.1
+  bpr_negatives: 1
+  early_stop_patience: 1000
+  eval_every: 2
+  ks: [10, 20]
+  device: cpu
+
+experiment:
+  seeds: [2024]
+  log_dir: results/logs
+  table_dir: results/tables
+  figure_dir: results/figures

@@ -1,0 +1,36 @@
+# MovieLens-100K  (debug / smoke test scale)
+dataset:
+  name: ml100k
+  data_dir: data/ml100k
+  train_file: train.txt
+  test_file: test.txt
+
+model:
+  embed_dim: 64
+  n_layers: 3
+  # Attention-specific (used by attentive_* models; ignored otherwise)
+  attn_hidden: 64       # hidden size of W_a (W_a in R^{2d -> attn_hidden})
+  gamma_init: 0.2       # initial residual-gate weight
+  gamma_learnable: true # learn gamma end-to-end
+  gamma_per_layer: false
+  # SimGCL-specific
+  cl_eps: 0.1           # epsilon in SimGCL noise injection
+  cl_temp: 0.2          # InfoNCE temperature
+
+train:
+  epochs: 200
+  batch_size: 2048
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  cl_lambda: 0.1        # weight on contrastive loss (SimGCL)
+  bpr_negatives: 1
+  early_stop_patience: 20
+  eval_every: 5
+  ks: [10, 20]
+  device: auto          # auto | cpu | cuda | mps
+
+experiment:
+  seeds: [2024, 2025, 2026]
+  log_dir: results/logs
+  table_dir: results/tables
+  figure_dir: results/figures

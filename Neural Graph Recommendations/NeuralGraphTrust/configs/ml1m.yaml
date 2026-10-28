@@ -1,0 +1,34 @@
+# MovieLens-1M
+dataset:
+  name: ml1m
+  data_dir: data/ml1m
+  train_file: train.txt
+  test_file: test.txt
+
+model:
+  embed_dim: 64
+  n_layers: 3
+  attn_hidden: 64
+  gamma_init: 0.2
+  gamma_learnable: true
+  gamma_per_layer: false
+  cl_eps: 0.1
+  cl_temp: 0.2
+
+train:
+  epochs: 400
+  batch_size: 4096
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  cl_lambda: 0.1
+  bpr_negatives: 1
+  early_stop_patience: 20
+  eval_every: 5
+  ks: [10, 20]
+  device: auto
+
+experiment:
+  seeds: [2024, 2025, 2026]
+  log_dir: results/logs
+  table_dir: results/tables
+  figure_dir: results/figures
