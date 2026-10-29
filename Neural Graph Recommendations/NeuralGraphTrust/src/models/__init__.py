@@ -1,4 +1,4 @@
-"""Model registry for Attentive-SimGCL."""
+"""Model registry: NGCF, Attention-NGCF (Stage 1), LightGCN, SimGCL and the gated attentive models (Stage 2)."""
 
 from .ngcf import NGCF
 from .lightgcn import LightGCN

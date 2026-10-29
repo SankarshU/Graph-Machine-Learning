@@ -11,21 +11,31 @@ The work develops in three stages:
 ## Layout
 
 ```
-src/models/        ngcf, attentive_ngcf, lightgcn, attentive_lightgcn, simgcl, attentive_simgcl
-src/train.py       training CLI (any model / dataset / seed / noise level)
-src/noise_injection.py   labeled random-edge injection (uniform or popularity-biased)
-experiments/graphtrust_eval.py   reliability (AUROC) and repair evaluation
+src/models/            ngcf, attentive_ngcf (Stage 1); lightgcn, simgcl; attentive_lightgcn,
+                       attentive_simgcl (Stage 2); _attention.py (masked neighbour attention),
+                       _base.py (shared embedding / BPR / contrastive-view code)
+src/graphtrust/        NeuralGraphTrust (Stage 3)
+  reliability.py       diagnose: per-edge scores r, rel, dot, cos and their AUROC
+  policies.py          act: pi0, pi_rel and matched controls (dot, cos, random, oracle)
+  repair.py            verify: frozen-parameter re-propagation on the edited graph, gate, targeting
+  evaluation.py        per-user metrics (joint and isolated repair), degree groups, fidelity
+src/train.py           training CLI (any model / dataset / seed / noise level)
+src/noise_injection.py labeled random-edge injection (uniform or popularity-biased)
+experiments/graphtrust_eval.py   runs the NeuralGraphTrust study for one trained model
 experiments/make_arxiv_tables.py tables of the paper, generated from results/logs
 experiments/run_arxiv_*.sh       the runs reported in the paper
-configs/           hyperparameters (ml100k_arxiv.yaml, ml1m_arxiv.yaml, ...)
-data/preprocessing/make_movielens.py   GroupLens MovieLens -> per-user 80/20 split
-results/logs/      run logs behind the reported MovieLens-100K numbers
+experiments/smoke_test.sh        end-to-end check of all six models on a synthetic graph
+tests/                 unit tests (pytest): attention, propagation identities, noise, repair
+configs/               hyperparameters (ml100k_arxiv.yaml, ml1m_arxiv.yaml, ...)
+data/preprocessing/    make_movielens.py: GroupLens MovieLens -> per-user 80/20 split
+results/logs/          run logs behind the reported MovieLens-100K numbers
 ```
 
 ## Reproducing
 
 ```bash
 pip install -r requirements.txt
+python -m pytest tests          # a few seconds on CPU
 
 # data: download MovieLens-100K from GroupLens, then
 python -m data.preprocessing.make_movielens ml100k /path/to/ml-100k/u.data

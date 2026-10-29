@@ -11,8 +11,8 @@ cd "$(dirname "$0")/.."
 # 1. Generate toy data
 python -m data.preprocessing.make_toy --out data/toy --seed 0
 
-# 2. Run each of the five models for a handful of epochs
-for M in lightgcn ngcf attentive_lightgcn simgcl attentive_simgcl; do
+# 2. Run each of the six models for a handful of epochs
+for M in lightgcn ngcf attentive_ngcf attentive_lightgcn simgcl attentive_simgcl; do
     echo "----- smoke: $M -----"
     python -m src.train --config configs/toy.yaml --model "$M" --seed 2024 \
         --tag smoke --device cpu --epochs 10

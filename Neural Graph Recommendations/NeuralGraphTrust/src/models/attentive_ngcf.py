@@ -9,10 +9,9 @@ submission, but padded slots are masked before the softmax (no repeated-neighbor
 from __future__ import annotations
 
 import torch
-import torch.nn.functional as F
 
-from .ngcf import NGCF
 from ._attention import MaskedNeighborAttention
+from .ngcf import NGCF
 
 
 class AttentiveNGCF(NGCF):
@@ -32,12 +31,7 @@ class AttentiveNGCF(NGCF):
         for layer in range(self.n_layers):
             save = save_alpha_layer is not None and layer == save_alpha_layer
             E_star = self.attn(E, self.neighbors, self.valid_mask, save_alpha=save)
-            LE = torch.sparse.mm(self.norm_adj, E_star)
-            term1 = self.W1[layer](LE + E_star)
-            term2 = self.W2[layer](LE * E_star)
-            E = F.leaky_relu(term1 + term2, negative_slope=0.2)
-            E = F.dropout(E, p=self.dropout_rate, training=self.training)
-            E = F.normalize(E, p=2, dim=1)
+            E = self._layer(layer, E_star)
             all_E.append(E)
         E_final = torch.cat(all_E, dim=1)
         u, i = torch.split(E_final, [self.n_users, self.n_items], dim=0)

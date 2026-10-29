@@ -17,8 +17,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from ._base import GraphRecBase
 
-class NGCF(nn.Module):
+
+class NGCF(GraphRecBase):
     def __init__(
         self,
         n_users: int,
@@ -31,18 +33,10 @@ class NGCF(nn.Module):
     ):
         super().__init__()
         if norm_adj is None:
-            raise ValueError("NGCF requires `norm_adj`.")
-        self.n_users = n_users
-        self.n_items = n_items
-        self.embed_dim = embed_dim
-        self.n_layers = n_layers
+            raise ValueError(f"{type(self).__name__} requires `norm_adj`.")
         self.dropout_rate = dropout
         self.register_buffer("norm_adj", norm_adj, persistent=False)
-
-        self.user_embedding = nn.Embedding(n_users, embed_dim)
-        self.item_embedding = nn.Embedding(n_items, embed_dim)
-        nn.init.xavier_uniform_(self.user_embedding.weight)
-        nn.init.xavier_uniform_(self.item_embedding.weight)
+        self._init_embeddings(n_users, n_items, embed_dim, n_layers)
 
         # Layer transforms — same dim per layer.
         self.W1 = nn.ModuleList([nn.Linear(embed_dim, embed_dim) for _ in range(n_layers)])
@@ -51,52 +45,21 @@ class NGCF(nn.Module):
             nn.init.xavier_uniform_(lin.weight)
             nn.init.zeros_(lin.bias)
 
-        self._cached_user: torch.Tensor | None = None
-        self._cached_item: torch.Tensor | None = None
+    def _layer(self, layer: int, E_in: torch.Tensor) -> torch.Tensor:
+        """One NGCF layer on the input table E_in (E^{(l-1)}, or the attention table in Stage 1)."""
+        LE = torch.sparse.mm(self.norm_adj, E_in)
+        term1 = self.W1[layer](LE + E_in)
+        term2 = self.W2[layer](LE * E_in)
+        E = F.leaky_relu(term1 + term2, negative_slope=0.2)
+        E = F.dropout(E, p=self.dropout_rate, training=self.training)
+        return F.normalize(E, p=2, dim=1)
 
     def propagate(self) -> tuple[torch.Tensor, torch.Tensor]:
         E = torch.cat([self.user_embedding.weight, self.item_embedding.weight], dim=0)
         all_E = [E]
         for layer in range(self.n_layers):
-            LE = torch.sparse.mm(self.norm_adj, E)
-            term1 = self.W1[layer](LE + E)
-            term2 = self.W2[layer](LE * E)
-            E = F.leaky_relu(term1 + term2, negative_slope=0.2)
-            E = F.dropout(E, p=self.dropout_rate, training=self.training)
-            E = F.normalize(E, p=2, dim=1)
+            E = self._layer(layer, E)
             all_E.append(E)
         E_final = torch.cat(all_E, dim=1)  # NGCF concatenates layer outputs
         u, i = torch.split(E_final, [self.n_users, self.n_items], dim=0)
         return u, i
-
-    def forward(self, users, pos_items, neg_items):
-        u_all, i_all = self.propagate()
-        u = u_all[users]
-        ip = i_all[pos_items]
-        in_ = i_all[neg_items]
-        pos_scores = (u * ip).sum(dim=-1)
-        neg_scores = (u * in_).sum(dim=-1)
-        u0 = self.user_embedding(users)
-        ip0 = self.item_embedding(pos_items)
-        in0 = self.item_embedding(neg_items)
-        return pos_scores, neg_scores, (u0, ip0, in0)
-
-    @torch.no_grad()
-    def cache_eval_embeddings(self) -> None:
-        was_training = self.training
-        self.eval()
-        u, i = self.propagate()
-        self._cached_user = u.detach()
-        self._cached_item = i.detach()
-        if was_training:
-            self.train()
-
-    def eval_user_embeddings(self) -> torch.Tensor:
-        if self._cached_user is None:
-            self.cache_eval_embeddings()
-        return self._cached_user
-
-    def eval_item_embeddings(self) -> torch.Tensor:
-        if self._cached_item is None:
-            self.cache_eval_embeddings()
-        return self._cached_item

@@ -1,0 +1,8 @@
+data/ml100k/
+data/ml1m/
+results/ckpt/
+__pycache__/
+paper/arxiv/*.tex
+data/toy/
+results/tables/
+results/figures/
